@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import time
-import win32com.client
+#import win32com.client
 from datetime import datetime
 from pylab import figure, axes, pie, title, savefig
 from matplotlib.font_manager import FontProperties
@@ -30,7 +30,7 @@ classData = ["",""]
 
 
 def rawInput():
-	x = raw_input(">>> : ")
+	x = input(">>> : ")
 	return str(x)
 
 def rollBackData(oldData):
@@ -42,8 +42,8 @@ def rollBackData(oldData):
 		question[num2][oldData[num2]-1] = question[num2][oldData[num2]-1]-1
 
 def printData():
-	print "     1     2     3     4     5     6"
-	print "------------------------------------------------"
+	print ("     1     2     3     4     5     6")
+	print ("------------------------------------------------")
 
 	for pNum in range(0,len(question)):
 			l = len(question[pNum])
@@ -56,7 +56,7 @@ def printData():
 			
 			for pNum2 in range(0,l):
 				s += str(question[pNum][pNum2]) + "     "
-			print s
+			print (s)
 
 def clearScreen():
 	os.system('cls' if os.name == 'nt' else 'clear')
@@ -77,7 +77,7 @@ def writeDataToHtml(writeHtmlFileName,data):
 
 def convertHtmlToDoc(htmlName,docName):
 	docName = "output/" + docName + ".doc"
-	word = win32com.client.Dispatch("Word.Application")
+	#word = win32com.client.Dispatch("Word.Application")
 
 	in_file  = os.path.abspath(htmlName)
 	out_file = os.path.abspath(docName)
@@ -126,8 +126,8 @@ def makeBarChart(chartData):
 	plt.clf()
 
 def makePieChart(fileName,chartData,chartTitle):
-	zhfont1 = FontProperties(fname='C:\Windows\Fonts\arial.ttf')
-	x = [u'1分', u'2分', u'3分', u'4分', u'5分', u'6分']
+	#zhfont1 = FontProperties(fname='C:\Windows\Fonts\arial.ttf')
+	x = ['1分', '2分', '3分', '4分', '5分', '6分']
 	y = np.array(chartData)
 	colors = ['black','red','gold','lightskyblue','darkgreen','violet']
 	percent = 100.*y/y.sum()
@@ -135,7 +135,7 @@ def makePieChart(fileName,chartData,chartTitle):
 	plt.axis('equal')
 	patches, texts = plt.pie(y, colors=colors,explode=explode, startangle=90, radius=1)
 
-	labels = [unicode('{0} - {1:1.2f} %').format(i,j) for i,j in zip(x, percent)]
+	labels = [('{0} - {1:1.2f} %').format(i,j) for i,j in zip(x, percent)]
 
 	plt.legend(patches, labels, loc='best', bbox_to_anchor=(-0.05, 1.),fontsize=10)
 	plt.title(chartTitle)
@@ -144,23 +144,22 @@ def makePieChart(fileName,chartData,chartTitle):
 		
 def inputData():
 	global totalCopies,classData,className,docTitle
-	print unicode("輸入社課日期:(ex:12月6號)",'utf-8')
-	classData[0] = rawInput().decode('big5')
-	print unicode("輸入講師名稱:",'utf-8')
-	classData[1] = rawInput().decode('big5')
-	docTitle =  classData[0] + classData[1] + u'滿意度'
+	print ("輸入社課日期:(ex:12月6號)")
+	classData[0] = rawInput()
+	print ("輸入講師名稱:")
+	classData[1] = rawInput()
+	docTitle =  classData[0] + classData[1] + '滿意度'
 
 
 	while True:
 		err = 0
-		print unicode("使用說明:將滿意度上面的數字已連續並在數字間加入空白 EX:3 6 5 6 5 5 6 6 6 6 6",'utf-8')
-		print unicode("輸入88來返回上一步",'utf-8')
-		print unicode("輸入99來完成報表",'utf-8')
-		print unicode("目前份數:" + str(totalCopies),'utf-8')
-		print
+		print ("使用說明:將滿意度上面的數字已連續並在數字間加入空白 EX:3 6 5 6 5 5 6 6 6 6 6")
+		print ("輸入88來返回上一步")
+		print ("輸入99來完成報表")
+		print ("目前份數:" + str(totalCopies))
+		print ()
 		printData()
-		print
-		print
+		print('\n')
 		data = rawInput()
 		appendData = data
 
@@ -172,8 +171,8 @@ def inputData():
 				clearScreen()
 				continue
 			else:
-				print unicode("你目前還沒輸入資料!",'utf-8')
-				print
+				print ("你目前還沒輸入資料!")
+				print()
 				time.sleep(3)
 				clearScreen()
 				continue
@@ -195,7 +194,7 @@ def inputData():
 				print
 
 			except:
-				print unicode("輸入錯誤",'utf-8')
+				print ("輸入錯誤")
 				print
 				print
 				err = 1
@@ -208,7 +207,7 @@ def inputData():
 			except:
 				for num2 in range(0,check):
 					question[num2][data[num2]-1] = question[num2][data[num2]-1]-1
-				print unicode("資料格式錯誤",'utf-8')
+				print ("資料格式錯誤")
 				err = 1
 				continue
 		if err != 1:
@@ -221,15 +220,15 @@ def finishData():
 	global adviseList
 	countAdvise = 0
 	
-	#using while will cause extra loop
+	# using while will cause extra loop
 	while True:
 
-		print "TotalInput: "
+		print ("TotalInput: ")
 		for num in range(len(adviseList)):
-			print adviseList[num]
-		print unicode("輸入88來回到上一步(""注意動作無法復原,絕對不是我懶得寫code :D"")",'utf-8')
-		print unicode("輸入99來完成",'utf-8')
-		print unicode("輸入心得及建議:",'utf-8')
+			print (adviseList[num])
+		print ("輸入88來回到上一步(""注意動作無法復原,絕對不是我懶得寫code :D"")")
+		print ("輸入99來完成")
+		print ("輸入心得及建議:")
 		inputAdvise = rawInput()
 
 		if inputAdvise == "99":
@@ -238,7 +237,7 @@ def finishData():
 			adviseList = adviseList[:-1]
 			continue
 		else:
-			print "inputAdvise2:" + inputAdvise
+			print ("inputAdvise2:" + inputAdvise)
 			
 		clearScreen()
 		countAdvise = countAdvise + 1
@@ -257,7 +256,7 @@ def calculateQuantifyData():
 def generateDoc1(adviseList):
 	global docTitle
 	
-	adviseContent = readFile("html/advise.html")
+	adviseContent = readFile("./html/advise.html")
 	
 	for num in range(len(adviseList)):
 		adviseContent.append(adviseList[num])
@@ -271,15 +270,15 @@ def generateDoc1(adviseList):
 		for num2 in range(10):
 			adviseContent[adviseContent.index('@' + str(num2) + '-' + str(num))] = question[num2+1][num] #without grade
 			
-	writeDataToHtml("html/adviseTemp.html",adviseContent)
-	convertHtmlToDoc("html/adviseTemp.html",docTitle)
-	os.remove("html/adviseTemp.html")
+	writeDataToHtml("./html/adviseTemp.html",adviseContent)
+	#convertHtmlToDoc("./html/adviseTemp.html",docTitle)
+	#os.remove("./html/adviseTemp.html")
 	
 def generateDoc2():
-	quantifyContent = readFile("html/quantify.html")
-	quantifyAdvise = readFile("html/quantifyAdvise.txt")
+	quantifyContent = readFile("./html/quantify.html")
+	quantifyAdvise = readFile("./html/quantifyAdvise.txt")
 	quantifyData = calculateQuantifyData()
-	print "making bar chart..."
+	print ("making bar chart...")
 	makeBarChart(quantifyData)
 	quantifyTotalScore = ""
 	quantifyTotalScoreSum = 0
@@ -303,13 +302,13 @@ def generateDoc2():
 		
 	quantifyContent[quantifyContent.index("@10-0")] = str(quantifyTotalScore[:-1]) + "=" + str(quantifyTotalScoreSum)
 	quantifyContent[quantifyContent.index("@10-1")] = str(quantifyTotalScoreSum) + "/6=" + str(round(quantifyTotalScoreSum/6,2)*100) + "%"
-	quantifyContent[quantifyContent.index("@10-2")] = docTitle.encode('big5')
-	writeDataToHtml("html/quantifyTemp.html",quantifyContent)
-	convertHtmlToDoc("html/quantifyTemp.html", docTitle + "quantify")
-	os.remove("html/quantifyTemp.html")
+	quantifyContent[quantifyContent.index("@10-2")] = docTitle
+	writeDataToHtml("./html/quantifyTemp.html",quantifyContent)
+	#convertHtmlToDoc("./html/quantifyTemp.html", docTitle + "quantify")
+	#os.remove("./html/quantifyTemp.html")
 
 def generateDoc3():
-	qualityContent = readFile('html/quality.html')
+	qualityContent = readFile("./html/quality.html")
 	qualityPieTitle = [u'1.整體評價',u'2. 事前宣傳',u'3. 場地',u'4. 講師上課流暢度',u'5. 講師的上課速度',u'6.講師表達清晰度',u'7. 主題和內容的契合度',u'8. 內容理解程度',u'9.主題和內容契合度',u'10.內容吸引程度']
 	
 	for num in range(10):
@@ -317,7 +316,7 @@ def generateDoc3():
 			qualityContent[qualityContent.index('@' + str(num) + '-' + str(num2))] = question[num+1][num2]
 			
 		makePieChart('html/@' + str(num) + '-6.png' , question[num+1], qualityPieTitle[num])
-		print "make chart " + str(num)
+		print ("make chart " + str(num))
 		
 	qualityContent[qualityContent.index('@10-1')] = totalCopies
 	qualityContent[qualityContent.index('@10-2')] = classData[0].encode('utf8')
@@ -326,16 +325,16 @@ def generateDoc3():
 	qualityContent[qualityContent.index('@10-5')] = classData[1].encode('utf8')
 	
 
-	writeDataToHtml("html/qualityTemp.html",qualityContent)
-	convertHtmlToDoc("html/qualityTemp.html", docTitle + u'quality')
-	os.remove("html/qualityTemp.html")
+	writeDataToHtml("./html/qualityTemp.html",qualityContent)
+	#convertHtmlToDoc("./html/qualityTemp.html", docTitle + u'quality')
+	#os.remove("./html/qualityTemp.html")
 	
 inputData()
 finishData()
-print "generating Doc1..."
+print ("generating Doc1...")
 generateDoc1(adviseList)
-print "generating Doc2..."
+print ("generating Doc2...")
 generateDoc2()
-print "generating Doc3..."
+print ("generating Doc3...")
 generateDoc3()
-print "complete"
+print ("complete")
