@@ -2,7 +2,7 @@ def generateDoc2():
 	quantifyContent = readFile("html/quantify.html")
 	quantifyAdvise = readFile("html/quantifyAdvise.txt")
 	quantifyData = calculateQuantifyData()
-	print "making bar chart..."
+	print ("making bar chart...")
 	makeBarChart(quantifyData)
 	quantifyTotalScore = ""
 	quantifyTotalScoreSum = 0
@@ -28,5 +28,4 @@ def generateDoc2():
 	quantifyContent[quantifyContent.index("@10-1")] = str(quantifyTotalScoreSum) + "/6=" + str(round(quantifyTotalScoreSum/6,2)*100) + "%"
 	quantifyContent[quantifyContent.index("@10-2")] = docTitle.encode('big5')
 	writeDataToHtml("html/quantifyTemp.html",quantifyContent)
-	convertHtmlToDoc("html/quantifyTemp.html", docTitle + "quantify")
-	os.remove("html/quantifyTemp.html")
+	#os.remove("html/quantifyTemp.html")

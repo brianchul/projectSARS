@@ -16,5 +16,4 @@ def generateDoc1(adviseList):
 			adviseContent[adviseContent.index('@' + str(num2) + '-' + str(num))] = question[num2+1][num] #without grade
 			
 	writeDataToHtml("html/adviseTemp.html",adviseContent)
-	convertHtmlToDoc("html/adviseTemp.html",docTitle)
-	os.remove("html/adviseTemp.html")
+	#os.remove("html/adviseTemp.html")

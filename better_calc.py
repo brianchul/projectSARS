@@ -7,8 +7,9 @@ from pylab import figure, axes, pie, title, savefig
 from matplotlib.font_manager import FontProperties
 import matplotlib.pyplot as plt
 import numpy as np
+import pdfkit
 
-  
+
 grade = [0 for n in range(4)]
 q1 = [0 for n in range(6)]
 q2 = [0 for n in range(6)]
@@ -62,7 +63,7 @@ def clearScreen():
 	os.system('cls' if os.name == 'nt' else 'clear')
 
 def readFile(readHtmlFileName):
-	with open(readHtmlFileName, 'r') as f:
+	with open(readHtmlFileName, 'r',encoding='utf-8-sig') as f:
 		content = f.readlines()
 	# you may also want to remove whitespace characters like `\n` at the end of each line
 	content = [x.strip() for x in content]
@@ -70,14 +71,14 @@ def readFile(readHtmlFileName):
 	return content
 	
 def writeDataToHtml(writeHtmlFileName,data):
-	thefile = open(writeHtmlFileName, 'w')
+	thefile = open(writeHtmlFileName, 'w',encoding='utf-8-sig')
 	for item in data:
 		print>>thefile, item
 	thefile.close()
 
 def convertHtmlToDoc(htmlName,docName):
 	docName = "output/" + docName + ".doc"
-	#word = win32com.client.Dispatch("Word.Application")
+	word = win32com.client.Dispatch("Word.Application")
 
 	in_file  = os.path.abspath(htmlName)
 	out_file = os.path.abspath(docName)
@@ -261,7 +262,7 @@ def generateDoc1(adviseList):
 	for num in range(len(adviseList)):
 		adviseContent.append(adviseList[num])
 	#或許可以用讀檔的方式避免錯誤roll back
-	
+
 	adviseContent[adviseContent.index('@total')] = totalCopies
 	for num in range(4):
 		adviseContent[adviseContent.index('@g' + str(num))] = grade[num]
