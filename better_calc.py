@@ -139,7 +139,6 @@ def makePieChart(fileName,chartData,chartTitle):
 	labels = [('{0} - {1:1.2f} %').format(i,j) for i,j in zip(x, percent)]
 
 	plt.legend(patches, labels, loc='best', bbox_to_anchor=(-0.05, 1.),fontsize=10)
-	plt.title(chartTitle)
 	plt.savefig(fileName, bbox_inches='tight')
 	plt.clf()
 		
